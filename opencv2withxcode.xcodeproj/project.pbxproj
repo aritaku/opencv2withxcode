@@ -53,6 +53,7 @@
 				9A58BFBC1AA4EC05002E7182 /* libopencv_core.2.4.10.dylib */,
 				9A58BFBA1AA4EBF9002E7182 /* libopencv_highgui.2.4.dylib */,
 				9A58BFB81AA4EBDD002E7182 /* libopencv_imgproc.2.4.dylib */,
+				9AB0EDA21AA6F4D700DB33B2 /* PupilImages */,
 				9A58BFB01AA4DE31002E7182 /* opencv2withxcode */,
 				9A58BFAF1AA4DE31002E7182 /* Products */,
 			);
@@ -72,6 +73,13 @@
 				9A58BFB11AA4DE31002E7182 /* main.cpp */,
 			);
 			path = opencv2withxcode;
+			sourceTree = "<group>";
+		};
+		9AB0EDA21AA6F4D700DB33B2 /* PupilImages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PupilImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +262,7 @@
 				9A58BFB71AA4DE31002E7182 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
