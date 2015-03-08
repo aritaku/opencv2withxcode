@@ -1,29 +1,3 @@
-//
-//  main.cpp
-//  opencv2withxcode
-//
-//  Created by 有村 琢磨 on 2015/03/03.
-//  Copyright (c) 2015年 takuma arimura. All rights reserved.
-//
-
-//#include <iostream>
-//#include <opencv2/opencv.hpp>
-//
-//using namespace cv;
-//using namespace std;
-//
-//int main () {
-//    VideoCapture capture(0);
-//    Mat frame;
-//    
-//    while (waitKey(1) !='q'){
-//        capture >> frame;
-//        imshow("sample", frame);
-//    }
-//    
-//    return 0;
-//}
-
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -34,13 +8,11 @@ int main(int argc, char *argv[])
 {
     cv::Mat_<uchar> img = cv::Mat::zeros(500, 500, CV_8UC1);
     
-    cv::Mat src_img = cv::imread("/Users/aritaku/Documents/PupilImages/eyes7n-1-web.png", 1);
+    cv::Mat src_img = cv::imread("/Users/aritaku/Documents/PupilImages/スクリーンショット .png", 1);
     //imread(filename, 1(=グレースケールで読み込む))
     if (!src_img.data) return -1;
     
-//    //現在のTickCount
-//    double f = 1000.0/cv::getTickFrequency();
-//    int64 time = cv::getTickCount();
+    //現在のTickCount
     int64 start = cv::getTickCount();
     
     
@@ -52,10 +24,15 @@ int main(int argc, char *argv[])
     //Hough変換のための前処理(画像の平滑化を行わないと誤検出が発生しやすい)
     cv::GaussianBlur(work_img, work_img, cv::Size(11,11), 2,2);
     
-    //Hough変換による炎の検出と検出した円の描画
-    //vectorってなんや
+    //Hough変換による円の検出と検出した円の描画
     std::vector<cv::Vec3f> circles;
-    cv::HoughCircles(work_img, circles, CV_HOUGH_GRADIENT, 1, 100, 20, 50);
+    
+    //マウスの瞳孔半径を検出出来ないのはHoughCircles, のパラメーターを変化させれば対応出来る可能性あり。検出する半径を変えていく。
+    cv::HoughCircles(work_img, circles, CV_HOUGH_GRADIENT,
+                     1, // 大きい閾値
+                     1000, // 円を検出する際の投票数の閾値
+                     1, //円半径の最小値
+                     20); //円半径の最大値
     
     
     //cv::Vec3fってなに
@@ -66,12 +43,6 @@ int main(int argc, char *argv[])
         cv::circle(dst_img, center, radius, cv::Scalar(0,0,255), 2);
     }
 
-//    //以上なんらかの処理
-//    cv::MatIterator_<uchar> it = img.begin();
-//    for(; it!=img.end(); ++it)
-//        *it = 0x10;
-//    //TickCountの変化を[ms]単位で表示
-//    std::cout<<(cv::getTickCount()-time)*f<<"[ms]"<<std::endl;
     int64 end = cv::getTickCount();
     double elapsedMsec = (end - start)*1000 / cv::getTickFrequency();
     std::cout<< elapsedMsec << "[ms]" << std::endl;
