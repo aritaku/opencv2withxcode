@@ -3,13 +3,14 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
+#include "RegionGrowing.h"
 
 int main(int argc, char *argv[])
 {
     cv::Mat_<uchar> img = cv::Mat::zeros(500, 500, CV_8UC1);
     
-    cv::Mat src_img = cv::imread("/Users/aritaku/Documents/PupilImages/スクリーンショット .png", 1);
     //imread(filename, 1(=グレースケールで読み込む))
+    cv::Mat src_img = cv::imread("/Users/aritaku/Dropbox/研究室/マウスの目/2015-03-10 15.15.55.png", 1);
     if (!src_img.data) return -1;
     
     //現在のTickCount
