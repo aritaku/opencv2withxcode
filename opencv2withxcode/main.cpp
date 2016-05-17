@@ -28,15 +28,13 @@ int main(int argc, char *argv[])
     //Hough変換による円の検出と検出した円の描画
     std::vector<cv::Vec3f> circles;
     
-    //マウスの瞳孔半径を検出出来ないのはHoughCircles, のパラメーターを変化させれば対応出来る可能性あり。検出する半径を変えていく。
     cv::HoughCircles(work_img, circles, CV_HOUGH_GRADIENT,
                      1, // 大きい閾値
                      1000, // 円を検出する際の投票数の閾値
-                     30, //円半径の最小値
-                     100); //円半径の最大値
+                     10, //円半径の最小値
+                     30); //円半径の最大値
     
     
-    //cv::Vec3fってなに
     std::vector<cv::Vec3f>::iterator it = circles.begin();
     for(; it!=circles.end(); ++it) {
         cv::Point center(cv::saturate_cast<int>((*it)[0]), cv::saturate_cast<int>((*it)[1]));
