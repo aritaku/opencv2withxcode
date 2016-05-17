@@ -3,14 +3,14 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
-#include "RegionGrowing.h"
+//#include "RegionGrowing.h"
 
 int main(int argc, char *argv[])
 {
     cv::Mat_<uchar> img = cv::Mat::zeros(500, 500, CV_8UC1);
     
     //imread(filename, 1(=グレースケールで読み込む))
-    cv::Mat src_img = cv::imread("/Users/aritaku/Dropbox/研究室/マウスの目/2015-03-10 15.15.55.png", 1);
+    cv::Mat src_img = cv::imread("/Users/arimuratakuma/Desktop/opencv2withxcode/grayhunabiki.png", 1);
     if (!src_img.data) return -1;
     
     //現在のTickCount
@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
     cv::HoughCircles(work_img, circles, CV_HOUGH_GRADIENT,
                      1, // 大きい閾値
                      1000, // 円を検出する際の投票数の閾値
-                     1, //円半径の最小値
-                     20); //円半径の最大値
+                     30, //円半径の最小値
+                     100); //円半径の最大値
     
     
     //cv::Vec3fってなに
